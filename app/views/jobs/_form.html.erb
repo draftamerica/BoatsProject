@@ -1,0 +1,47 @@
+<%= form_with(model: job, local: true) do |form| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.select(:origin, Locations.list, {:prompt => true}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination %>
+    <%= form.select(:destination, Locations.list, {:prompt => true}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :boats %>
+    <%= form.select :boat_ids, current_user.boats.collect {|boat| [boat.name, boat.id]}, {}, :multiple => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :containers %>
+    <%= form.number_field :containers, id: :job_containers %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :job_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.number_field :cost, id: :job_cost %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
