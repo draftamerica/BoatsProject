@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Boats</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
+<body>
+    <% if user_signed_in? %>
+    Logged in as <strong><%= current_user.email %></strong>.
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %> <br>
+    <%= link_to "Jobs", jobs_path, :class => 'navbar-link' %> <br>
+    <%= link_to 'Boats', boats_path %>
+
+    <% end %>
     <%= yield %>
-  </body>
+</body>
 </html>
