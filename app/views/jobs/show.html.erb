@@ -33,17 +33,38 @@
 <br>
 <br>
 
-<--!COMMENTS loop -->
 <p>
-    # @jobs.comments.each
-  <strong>All Comments:</strong>
-  <%= @job.comment %>
+    <strong>All Comments</strong>
+    <% @job.comments.each do |comment| %>
+        <%= comment.comment %> <br>
+    <% end %>
 </p>
 
-<--! FORM -->
 <p>
-  <strong>New Comment:</strong>
-  <%= @job.comment %>
+  <strong>New Comment</strong>
+ <%= form_with(model: @comment, url: comments_path, local:true) do |form| %>
+ <% if @comment.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+     <ul>
+     <% @comment.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+
+    <div class="field">
+      <%= form.label :comment %>
+      <%= form.text_area :comment %>
+      <%= form.hidden_field :job_id, value: @job.id %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
