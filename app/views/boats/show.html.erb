@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+
+    <% if @boat.photos.first %>
+<p>
+    <%= image_tag @boat.photos.first.image.url(:medium) %>
+</p>
+    <% end %>
+
 <p>
   <strong>User:</strong>
   <%= @boat.user_id %>

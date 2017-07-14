@@ -5,6 +5,10 @@ class BoatsController < ApplicationController
   # GET /boats.json
   def index
     @boats = current_user.boats
+    puts " ** ENV['S3_REGION']: #{ENV['S3_REGION'].inspect}"
+    puts " ** ENV['S3_BUCKET']: #{ENV['S3_BUCKET'].inspect}"
+    puts " ** ENV['AWS_ACCESS_KEY_ID']: #{ENV['AWS_ACCESS_KEY_ID'].inspect}"
+    puts " ** ENV['AWS_SECRET_ACCESS_KEY']: #{ENV['AWS_SECRET_ACCESS_KEY'].inspect}"
   end
 
   # GET /boats/1

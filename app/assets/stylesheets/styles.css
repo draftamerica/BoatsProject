@@ -1,0 +1,13 @@
+.menu-container {
+    text-align: center;
+    height: 45px;
+    width: 100%;
+    background-color: yellow;
+}
+.boatsh1 {
+    box-shadow: 6px 6px 6px 6px aqua;
+    color: green;
+    letter-spacing: 0.1em;
+    font-family: Verdana;
+    size: 20px;
+}
