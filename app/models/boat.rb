@@ -7,4 +7,6 @@ class Boat < ApplicationRecord
     validates :name, uniqueness: { case_sensitive: false }
     validates :location, inclusion: { in: Locations.list,
     message: "Invalid location" }
+
+    accepts_nested_attributes_for :boats_jobs
 end

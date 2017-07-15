@@ -34,7 +34,8 @@ class BoatsController < ApplicationController
     respond_to do |format|
       if @boat.save
         format.html { redirect_to @boat, notice: 'Boat was successfully created.' }
-        format.json { render :show, status: :created, location: @boat }
+        # format.json { render :show, status: :created, location: @boat }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @boat.errors, status: :unprocessable_entity }

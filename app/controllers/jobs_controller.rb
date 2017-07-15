@@ -1,6 +1,12 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
+  def add_boats
+      puts "\n*****add_boats****"
+      puts "\n****** params.inspect, #{params.inspect} ******"
+      @job = Job.find(params[:job_id])
+  end
+
   # GET /jobs
   # GET /jobs.json
   def index
@@ -11,6 +17,7 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @comment = Comment.new
+    @boats = BoatsJob.where(job_id:@job.id)
   end
 
   # GET /jobs/new
@@ -30,8 +37,13 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
+        @boatsjob = BoatsJob.new
+        @boatsjob.boat_id = params["boat_ids"]
+        @boatsjob.job_id = @job.id
+        @boatsjob.save
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
-        format.json { render :show, status: :created, location: @job }
+        # format.json { render :show, status: :created, location: @job }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @job.errors, status: :unprocessable_entity }
